@@ -21,4 +21,3 @@ export interface ICandidate extends Document {
     }
   })
   export default mongoose.model<ICandidate>("Candidate",CandidateSchema)
-  

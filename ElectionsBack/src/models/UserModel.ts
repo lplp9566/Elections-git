@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
 
 export interface IUser extends Document {
-  id: Types.ObjectId;
   userName: string;
   password: string;
   isAdmin: boolean;
@@ -19,7 +18,7 @@ const UserSchema = new Schema<IUser>({
     password:{
         type:String,
         required:true,
-        minlength :[9,"password most be 9 "],
+        minlength :[3,"password most be 3 "],
         maxlength:[9,"its bagger then 9"],
       },
       isAdmin:{
