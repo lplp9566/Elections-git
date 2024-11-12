@@ -52,9 +52,9 @@ export const checkToken = async (req: Request, res: Response) => {
         const findUser = await UserModel.findOne({ userName: userName });
         
         if (findUser && findUser._id!.toString() === decoded.userId) {
-            res.status(200).json({ message: "Token and user match" });
+            res.status(200).json(true);
         } else {
-            res.status(401).json({ message: "Token does not match the user" });
+            res.status(401).json(false);
         }
     } catch (error) {
         console.error("Invalid token:", error);

@@ -9,9 +9,12 @@ interface AdminPrivateRoute {
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const IsAdminProvider = ({component}:AdminPrivateRoute) => {
     const {user} = useSelector((state: RootState) => state.user);
-    const response = axios.post(`${BASE_URL}/`)
-    if (!user?.isAdmin) {
+    const response = axios.post(`${BASE_URL}/api/checkToken`,)
+    if(!response){
         return <Navigate to="/" />;
+    }
+    if (!user?.isAdmin) {
+       
     }
   return (
     <div>

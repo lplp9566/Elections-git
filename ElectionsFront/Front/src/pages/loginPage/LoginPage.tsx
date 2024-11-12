@@ -36,6 +36,7 @@ const LoginPage: FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const user = users.find((u)=> { return u.userName == userName && u.password == password})
+  
     console.log(user)
     if (user){
 
@@ -43,6 +44,7 @@ const LoginPage: FC = () => {
     try {
       const result = await dispatch(loginUser(user))
       if (result){
+        localStorage.setItem('userName',userName); 
         navigate("/votePage");
       }
      
