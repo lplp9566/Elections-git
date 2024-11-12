@@ -3,6 +3,7 @@ import UserModel, { IUser } from "../models/UserModel";
 import CandidateModel from "../models/CandidateModel";
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
+import { v3 } from "uuid";
 const SECRET_KEY:string = process.env.SECRET_KEY || " my_secret"
  export const createUser =async (req:Request,res:Response):Promise<void>=>{
     const user =req.body
@@ -37,7 +38,7 @@ export const userlogin = async (req:Request,res:Response)=>{
         }
         const userId =findUser?._id
         const token = jwt.sign({userId},SECRET_KEY,{expiresIn :"1h"})
-        res.status(200).json({tokin:token})
+        res.status(200).json({user:findUser, token:token})
     }
     catch{
         res.status(400).json("The username or password is incorrect")
@@ -58,3 +59,14 @@ export const getAllCandidate = async (req:Request,res:Response)=>{
  
 } 
 
+
+export const getUsers = async (req: Request, res: Response) => {
+    try {
+      const candidates = await UserModel.find();
+      res.status(200).json(candidates);
+    } catch (err) {
+      res.status(400).json({
+        massage: "something went wrong in -getCandidates-@userController",
+      });
+    }
+  };
