@@ -2,11 +2,10 @@ import React, { FC, useEffect, useState } from "react";
 import "./LoginPage.css"
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import { Form, Link, useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../store/features/UserSlice";
 import { User } from "../../types";
 import axios from "axios";
-import Statistics from "../../components/statistics/Statistics";
 
 const useAppDispatch = () => useDispatch<AppDispatch>();
 const BASE_URL = import.meta.env.VITE_BASE_URL;

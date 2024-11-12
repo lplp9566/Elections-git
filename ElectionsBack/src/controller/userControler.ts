@@ -43,8 +43,26 @@ export const userlogin = async (req:Request,res:Response)=>{
     catch{
         res.status(400).json("The username or password is incorrect")
     }
-    
 }
+export const checkToken = async (req: Request, res: Response) => {
+    const { token, userName } = req.body;
+    try {
+        const decoded = jwt.verify(token, SECRET_KEY) as { userId: string };
+        
+        const findUser = await UserModel.findOne({ userName: userName });
+        
+        if (findUser && findUser._id!.toString() === decoded.userId) {
+            res.status(200).json({ message: "Token and user match" });
+        } else {
+            res.status(401).json({ message: "Token does not match the user" });
+        }
+    } catch (error) {
+        console.error("Invalid token:", error);
+        res.status(400).json({ message: "Invalid token" });
+    }
+};
+
+
 export const getAllCandidate = async (req:Request,res:Response)=>{
     try{
         const allCandidate = await CandidateModel.find();

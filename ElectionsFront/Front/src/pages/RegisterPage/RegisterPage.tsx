@@ -17,8 +17,6 @@ const RegisterPage = () => {
       e.preventDefault();
       try {
         const result = await dispatch(registerUser({ userName, password }))
-        // console.log(result.payload)
-        // console.log(userName,password)
         if (result) {
             navigate("/login")
           
